@@ -1,0 +1,36 @@
+C4Component
+title C3 - Report Backend Components
+
+Container(reportBackend, "Report Backend", "Python", "Servicio de generación de reportes")
+
+Component(reportController, "ReportController", "Coordina generate_report y el flujo completo")
+Component(factory, "ReportFactory", "Devuelve generador, formateador y método de entrega")
+Component(salesGen, "SalesReportGenerator", "Genera reportes de ventas")
+Component(inventoryGen, "InventoryReportGenerator", "Genera reportes de inventario")
+Component(financialGen, "FinancialReportGenerator", "Genera reportes financieros")
+
+Component(pdfFormatter, "PDFFormatter", "Formatea reporte en PDF")
+Component(excelFormatter, "ExcelFormatter", "Formatea reporte en Excel")
+Component(htmlFormatter, "HTMLFormatter", "Formatea reporte en HTML")
+
+Component(emailDelivery, "EmailDelivery", "Entrega reportes por correo")
+Component(downloadDelivery, "DownloadDelivery", "Expone reporte para descarga")
+Component(cloudDelivery, "CloudDelivery", "Entrega reportes a la nube")
+
+Component(reportHistoryRepo, "ReportHistoryRepository", "Persistencia de historial de reportes")
+
+Rel(reportController, factory, "Solicita estrategias (generator/formatter/delivery)")
+Rel(factory, salesGen, "Selecciona para tipo = 'sales'")
+Rel(factory, inventoryGen, "Selecciona para tipo = 'inventory'")
+Rel(factory, financialGen, "Selecciona para tipo = 'financial'")
+Rel(factory, pdfFormatter, "Selecciona para formato = 'pdf'")
+Rel(factory, excelFormatter, "Selecciona para formato = 'excel'")
+Rel(factory, htmlFormatter, "Selecciona para formato = 'html'")
+Rel(factory, emailDelivery, "Selecciona para entrega = 'email'")
+Rel(factory, downloadDelivery, "Selecciona para entrega = 'download'")
+Rel(factory, cloudDelivery, "Selecciona para entrega = 'cloud'")
+
+Rel(reportController, salesGen, "Genera contenido de reporte")
+Rel(reportController, pdfFormatter, "Formatea contenido")
+Rel(reportController, emailDelivery, "Entrega reporte")
+Rel(reportController, reportHistoryRepo, "Registra metadatos del reporte")
