@@ -1,0 +1,23 @@
+C4Container
+title C2 - Report Management System (Containers)
+
+Person(manager, "Gerente / Analista")
+
+System_Boundary(reportSys, "Report Management System") {
+  Container(reportBackend, "Report Backend", "Python Script/Service", "Genera, formatea y entrega reportes")
+  ContainerDb(reportRepository, "Report Repository", "File System / DB", "Almacén de reportes generados e historial")
+}
+
+System_Ext(salesDB, "Sales DB", "Base de datos de ventas")
+System_Ext(inventoryDB, "Inventory DB", "Base de datos de inventario")
+System_Ext(accountingSys, "Accounting System", "Sistema financiero")
+System_Ext(emailSrv, "Email Provider", "SMTP/Email API")
+System_Ext(cloudStorage, "Cloud Storage", "Almacenamiento de reportes en la nube")
+
+Rel(manager, reportBackend, "Solicita reporte (tipo, formato, entrega)", "CLI/Interface")
+Rel(reportBackend, salesDB, "Consulta datos de ventas", "SQL/API")
+Rel(reportBackend, inventoryDB, "Consulta datos de inventario", "SQL/API")
+Rel(reportBackend, accountingSys, "Consulta datos financieros", "API")
+Rel(reportBackend, emailSrv, "Envía reportes por email", "SMTP/API")
+Rel(reportBackend, cloudStorage, "Sube reportes generados", "HTTP/REST")
+Rel(reportBackend, reportRepository, "Guarda metadatos e historial de reportes", "Lectura/Escritura")
