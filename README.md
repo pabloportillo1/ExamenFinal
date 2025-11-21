@@ -33,7 +33,7 @@ Ejercicio 2 – ejercicio2_gestor_documentos.py
 
  I. Principios : SOLID aplicados
 
-  SRP (Single Responsibility Principle)
+  1. SRP (Single Responsibility Principle)
 
    SalesReportGenerator, InventoryReportGenerator, FinancialReportGenerator solo generan contenido.
 
@@ -43,7 +43,7 @@ Ejercicio 2 – ejercicio2_gestor_documentos.py
 
    ReportSystem coordina el flujo : genera despues formatea y enseguida entrega, finalmente guarda el historial.
 
-  Open/Closed y Dependency Inversion
+  2. Open/Closed y Dependency Inversion
 
    Nuevos tipos de reportes, formatos o métodos de entrega se agregan creando nuevas clases que implementen las interfaces, sin modificar ReportSystem.
    
@@ -51,11 +51,11 @@ Ejercicio 2 – ejercicio2_gestor_documentos.py
 
  II. Patrones de diseño aplicados
    
-  Strategy (comportamental)
+  1. Strategy (comportamental)
    
    Estrategia de generación (ReportGenerator), de formato (ReportFormatter) y de entrega (ReportDelivery).
    
-  Factory Method (creacional)
+  2. Factory Method (creacional)
 
    ReportFactory devuelve el generador, formateador y método de entrega adecuados según los strings ("sales", "pdf", "email", etc.).
 
