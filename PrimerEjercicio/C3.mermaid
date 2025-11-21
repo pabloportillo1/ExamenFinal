@@ -1,0 +1,21 @@
+C4Component
+title C3 - Notification Backend Components
+
+Container(notificationBackend, "Notification Backend", "Python", "Servicio de notificaciones")
+
+Component(orderController, "OrderNotificationController", "Coordina process_order y el flujo de la notificación")
+Component(factory, "NotificationFactory", "Crea estrategias de envío según el tipo")
+Component(emailSender, "EmailNotificationSender", "Envío de notificaciones por correo")
+Component(smsSender, "SmsNotificationSender", "Envío de notificaciones por SMS")
+Component(pushSender, "PushNotificationSender", "Envío de notificaciones push")
+
+Component(historyRepo, "NotificationHistoryRepository", "Persistencia del historial de notificaciones")
+
+Rel(orderController, factory, "Solicita sender según tipo")
+Rel(factory, emailSender, "Devuelve instancia para 'email'")
+Rel(factory, smsSender, "Devuelve instancia para 'sms'")
+Rel(factory, pushSender, "Devuelve instancia para 'push'")
+Rel(orderController, emailSender, "Envía notificación cuando se selecciona email")
+Rel(orderController, smsSender, "Envía notificación cuando se selecciona sms")
+Rel(orderController, pushSender, "Envía notificación cuando se selecciona push")
+Rel(orderController, historyRepo, "Registra notificaciones enviadas")
