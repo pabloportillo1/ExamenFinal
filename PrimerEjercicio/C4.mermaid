@@ -1,0 +1,22 @@
+C4Dynamic
+title C4 - Flujo de process_order (Order Notification System)
+
+Person(customer, "Cliente")
+System(store, "Frontend Tienda Online", "Cliente web")
+Container(notificationBackend, "Notification Backend", "Python", "Servicio de notificaciones")
+Component(orderController, "OrderNotificationController", "Coordina el proceso")
+Component(factory, "NotificationFactory", "Crea estrategias")
+Component(emailSender, "EmailNotificationSender", "Strategy correo")
+Component(smsSender, "SmsNotificationSender", "Strategy SMS")
+Component(historyRepo, "NotificationHistoryRepository", "Persistencia historial")
+
+Rel_D(customer, store, "1) Confirma compra", "1")
+Rel_D(store, notificationBackend, "2) Envía order + ['email','sms']", "2")
+Rel_D(notificationBackend, orderController, "3) process_order(order, tipos)", "3")
+Rel_D(orderController, factory, "4) create_sender('email')", "4")
+Rel_D(factory, emailSender, "5) Retorna EmailNotificationSender", "5")
+Rel_D(orderController, emailSender, "6) send(order)", "6")
+Rel_D(orderController, factory, "7) create_sender('sms')", "7")
+Rel_D(factory, smsSender, "8) Retorna SmsNotificationSender", "8")
+Rel_D(orderController, smsSender, "9) send(order)", "9")
+Rel_D(orderController, historyRepo, "10) Guarda registro de notificaciones", "10")
