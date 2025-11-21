@@ -1,0 +1,16 @@
+C4Context
+title C1 - Order Notification System (Context)
+
+Person(customer, "Cliente", "Realiza compras en la tienda online")
+System(store, "Frontend Tienda Online", "Aplicación web donde el cliente compra")
+System(notificationSys, "Order Notification System", "Procesa pedidos y envía notificaciones")
+
+System_Ext(emailSrv, "Email Provider", "Servicio externo de correo")
+System_Ext(smsGateway, "SMS Gateway", "Servicio externo de SMS")
+System_Ext(pushService, "Push Notification Service", "Servicio de notificaciones push")
+
+Rel(customer, store, "Realiza pedido")
+Rel(store, notificationSys, "Envía datos de pedido y tipos de notificación")
+Rel(notificationSys, emailSrv, "Envía correos de confirmación")
+Rel(notificationSys, smsGateway, "Envía SMS de confirmación")
+Rel(notificationSys, pushService, "Envía notificaciones push")
