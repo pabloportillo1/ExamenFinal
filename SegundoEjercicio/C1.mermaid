@@ -1,0 +1,23 @@
+C4Context
+title C1 - Report Management System (Context)
+
+Person(manager, "Gerente / Analista", "Solicita reportes")
+
+System(reportSys, "Report Management System", "Genera, formatea y entrega reportes")
+
+System_Ext(salesDB, "Sales DB", "Fuente de datos de ventas")
+System_Ext(inventoryDB, "Inventory DB", "Fuente de datos de inventario")
+System_Ext(accountingSys, "Accounting System", "Datos financieros")
+
+System_Ext(emailSrv, "Email Provider", "Servicio de correo")
+System_Ext(cloudStorage, "Cloud Storage", "Repositorio de reportes")
+
+Rel(manager, reportSys, "Configura y solicita reportes")
+Rel(reportSys, salesDB, "Lee datos de ventas")
+Rel(reportSys, inventoryDB, "Lee datos de inventario")
+Rel(reportSys, accountingSys, "Lee datos financieros")
+Rel(reportSys, emailSrv, "Envía reportes por email")
+Rel(reportSys, cloudStorage, "Publica reportes en la nube")
+
+    ReportSystem --> ReportFormatter
+    ReportSystem --> ReportDelivery
