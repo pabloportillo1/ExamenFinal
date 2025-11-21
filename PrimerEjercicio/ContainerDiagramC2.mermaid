@@ -1,0 +1,22 @@
+C4Container
+title C2 - Order Notification System (Containers)
+
+Person(customer, "Cliente")
+
+System(store, "Frontend Tienda Online", "Aplicación web externa")
+
+System_Boundary(notificationSys, "Order Notification System") {
+  Container(notificationBackend, "Notification Backend", "Python Script/Service", "Orquesta el envío de notificaciones de pedidos")
+  ContainerDb(notificationHistory, "Notification History Store", "JSON/DB", "Almacena historial de notificaciones enviadas")
+}
+
+System_Ext(emailSrv, "Email Provider", "SMTP/Email API")
+System_Ext(smsGateway, "SMS Gateway", "REST API")
+System_Ext(pushService, "Push Notification Service", "REST/WebSocket API")
+
+Rel(customer, store, "Realiza pedido")
+Rel(store, notificationBackend, "Envía pedido + tipos de notificación", "JSON/CLI/HTTP")
+Rel(notificationBackend, emailSrv, "Envia email de confirmación", "SMTP/API")
+Rel(notificationBackend, smsGateway, "Envía SMS de confirmación", "HTTP/JSON")
+Rel(notificationBackend, pushService, "Envía push de confirmación", "HTTP/JSON")
+Rel(notificationBackend, notificationHistory, "Guarda historial de notificaciones", "Lectura/Escritura")
